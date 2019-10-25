@@ -1,0 +1,156 @@
+<div class="main-content">
+    <mat-table matTableFilter [exampleEntity]="filterEntity"
+               [filterType]="filterType" [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="company">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="company" [(ngModel)]="filterEntity.company">
+                </mat-form-field>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.company}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="name" [(ngModel)]="filterEntity.name">
+                </mat-form-field>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="exchangeId">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="exchangeId" [(ngModel)]="filterEntity.exchangeId">
+                </mat-form-field>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.exchangeId}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="relationId">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="relationId" [(ngModel)]="filterEntity.relationId">
+                </mat-form-field>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.relationId}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="stateId">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="Stato" [(ngModel)]="filterEntity.stateId">
+                </mat-form-field>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.stateId}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="categoryId">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="categoryId" [(ngModel)]="filterEntity.categoryId">
+                </mat-form-field>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.categoryId}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="url">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="url" [(ngModel)]="filterEntity.url">
+                </mat-form-field>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let element">
+                <button *ngIf="element.url != 0 || element.url != ''" (click)="goToUrl(element.url)"
+                        class="btn btn-primary btn-sm">Vai al sito
+                </button>
+            </mat-cell>
+
+        </ng-container>
+        <ng-container matColumnDef="typoAct">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="typoAct" [(ngModel)]="filterEntity.typoAct">
+                </mat-form-field>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.typoAct}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="tag">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="tag" [(ngModel)]="filterEntity.tagId">
+                </mat-form-field>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.tagId}} </mat-cell>
+        </ng-container>
+
+
+        <!--<ng-container matColumnDef="isConstitutionClass">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-checkbox class="example-margin" [(ngModel)]="filterEntity.isConstitutionClass">Constitution Class</mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.isConstitutionClass}} </mat-cell>
+        </ng-container>-->
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[30, 60]"></mat-paginator>
+
+
+    <!--
+                <div class="mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource">
+
+
+                        &lt;!&ndash; Company Column &ndash;&gt;
+                        <ng-container matColumnDef="company">
+                            <th mat-header-cell *matHeaderCellDef> Azienda </th>
+                            <td mat-cell *matCellDef="let element"> {{element.company}} </td>
+
+                        &lt;!&ndash; Name Column &ndash;&gt;
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef> Nome </th>
+                            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                        </ng-container>
+
+                        &lt;!&ndash; exchangeId Column &ndash;&gt;
+                        <ng-container matColumnDef="exchangeId">
+                            <th mat-header-cell *matHeaderCellDef> Mercato </th>
+                            <td mat-cell *matCellDef="let element"> {{element.exchangeId}} </td>
+                        </ng-container>
+                        &lt;!&ndash; stateId Column &ndash;&gt;
+                        <ng-container matColumnDef="stateId">
+                            <th mat-header-cell *matHeaderCellDef> Stato </th>
+                            <td mat-cell *matCellDef="let element"> {{element.stateId}} </td>
+                        </ng-container>
+                        &lt;!&ndash; typoAct Column &ndash;&gt;
+                        <ng-container matColumnDef="typoAct">
+                            <th mat-header-cell *matHeaderCellDef> typoAct </th>
+                            <td mat-cell *matCellDef="let element"> {{element.typoAct}} </td>
+                        </ng-container>
+                        &lt;!&ndash; relationId Column &ndash;&gt;
+                        <ng-container matColumnDef="relationId">
+                            <th mat-header-cell *matHeaderCellDef> Rapporto </th>
+                            <td mat-cell *matCellDef="let element"> {{element.relationId}} </td>
+                        </ng-container>
+                        &lt;!&ndash; categoryId Column &ndash;&gt;
+                        <ng-container matColumnDef="categoryId">
+                            <th mat-header-cell *matHeaderCellDef> Categoria </th>
+                            <td mat-cell *matCellDef="let element"> {{element.categoryId}} </td>
+                        </ng-container>
+                        &lt;!&ndash; url Column &ndash;&gt;
+                        <ng-container matColumnDef="url">
+                            <th mat-header-cell *matHeaderCellDef> URL </th>
+                            <td mat-cell *matCellDef="let element"> {{element.url}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+
+                    <mat-paginator [pageSizeOptions]="[15, 30, 60]" showFirstLastButtons></mat-paginator>
+                </div>            &lt;!&ndash; end col-md-12 &ndash;&gt;
+    -->
+</div>
+<!-- end row -->
+
