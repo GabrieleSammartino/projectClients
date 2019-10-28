@@ -11,11 +11,11 @@ var clientSchema = mongoose.Schema({
     relationId: {type: String, required: true},
     exchangeId: {type: String, required: true},
     stateId: {type: String, required: true},
-    tagId: {type: String, required: true},
+    tagIds: [String],
     typoOpp: {type: String, minlength: 2},
     descOpp: {type: String, minlength: 2},
     note: {type: String, minlength: 2},
-    arrayDocs: []
+    arrayDocs: [String],
 
 
 });

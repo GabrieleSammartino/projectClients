@@ -4,13 +4,12 @@ var Client = require('../models/Client');
 var Relation = require('../models/Relation');
 var State = require('../models/State');
 var Exchange = require('../models/Exchange');
+var Opportuniy = require('../models/Opportunity');
 var Tag = require('../models/Tag')
 var router = express.Router();
 let fs = require('fs-extra');
-const path = require('path')
-
-
-const multer = require('multer');
+const path = require('path');
+var multer = require('multer');
 
 
 router.get('/files', function (req, res) {
@@ -30,6 +29,12 @@ router.get('/files', function (req, res) {
 });
 router.get('/clients', function (req, res) {
     Client.find({}, function (err, clients) {
+        if (err) return res.status(500).json({error: err});
+        res.json(clients);
+    });
+});
+router.get('/opportunities', function (req, res) {
+    Opportuniy.find({}, function (err, clients) {
         if (err) return res.status(500).json({error: err});
         res.json(clients);
     });
@@ -197,10 +202,60 @@ router.get('/tags', function (req, res) {
         res.status(201).json(newEvent + err);
     })
 });*/
+let uploadOpp = multer({
+    storage: multer.diskStorage({
+        destination: (req, file, callback) => {
+            let company = req.body.company;
+            let path = `./opportunities//${company}`;
+            fs.mkdirsSync(path);
+            callback(null, path);
+        },
+        filename: (req, file, callback) => {
+            //originalname is the uploaded file's name with extn
+            callback(null, file.originalname);
+        }
+    })
+});
+router.post('/opportunity/', uploadOpp.single('doc'), (req, res) => {
 
+
+    const testFolder = './opportunities/' + req.body.company + '/';
+
+    fs.readdir(testFolder, (err, files) => {
+        if (err) {
+            res.send("Error getting directory information.")
+        } else {
+            console.log(files);
+        }
+        var newOpp = Opportuniy({
+
+            name: req.body.name,
+            desc: req.body.desc,
+            clientId: req.body.clientId,
+            active: req.body.active
+
+
+        });
+        newOpp.save(function (err) {
+            res.status(201).json(newOpp + " " + err + " Name Opportunity: " + req.body.name);
+        })
+    });
+});
+router.post('/tag/', (req, res) => {
+
+    var newTag = Tag({
+
+        name: req.body.name
+
+    });
+    newTag.save(function (err) {
+        res.status(201).json(newTag + " " + err + " Name Tag: " + req.body.name);
+    })
+
+});
 router.post('/exchange/', (req, res) => {
 
-    var newExc = Category({
+    var newExc = Exchange({
 
         name: req.body.name
 
@@ -216,7 +271,7 @@ var stringAll = "Abbigliamento, Abbigliamento, Abbigliamento, Agricoltura, Arte,
 router.post('/category/', (req, res) => {
     var newCat = Category({
         name: req.body.name
-    } );
+    });
 
     newCat.save(function (err) {
         res.status(201).json(newCat + " " + err + " Name Category: " + req.body.name);
@@ -249,7 +304,7 @@ router.post('/relation/', (req, res) => {
 
         name: req.body.name
 
-    } );
+    });
     newRelation.save(function (err) {
         res.status(201).json(newRelation + " " + err + " Name Relation: " + req.body.name);
     })
@@ -261,7 +316,7 @@ router.post('/relation/', (req, res) => {
 
         name: req.body.name
 
-    } );
+    });
     newRelation.save(function (err) {
         res.status(201).json(newRelation + " " + err + " Name Relation: " + req.body.name);
     })
@@ -273,7 +328,7 @@ router.post('/state/', (req, res) => {
 
         name: req.body.name
 
-    } );
+    });
     newState.save(function (err) {
         res.status(201).json(newState + " " + err + " Name State: " + req.body.name);
     })
@@ -298,7 +353,7 @@ router.post('/company', (req, res) => {
     var newComp = Company({
 
         name: req.body.name
-    } );
+    });
     newComp.save(function (err) {
         res.status(201).json(newComp + " " + err + " Name Company: " + req.body.name);
     })
@@ -312,7 +367,7 @@ router.post('/relation', (req, res) => {
 
         name: req.body.name
 
-    }  );
+    });
     newTypo.save(function (err) {
         res.status(201).json(newTypo + err);
     })
@@ -357,8 +412,9 @@ router.post('/client', upload.single('doc'), (req, res) => {
             note: req.body.note,
             typoAct: req.body.typoAct,
             url: req.body.url,
+            tagIds: req.body.tagIds,
             arrayDocs: files //req.file.path.substring(10, req.file.path.length)
-        } );
+        });
         newClient.save(function (err) {
             res.status(201).json(newClient + err);
         })
