@@ -8,6 +8,6 @@ var exchangeSchema = mongoose.Schema({
 });
 exchangeSchema.plugin(uniqueValidator);
 
-Exchange = mongoose.model('exchangeSchema',exchangeSchema);
+Exchange = mongoose.model('exchange',exchangeSchema);
 module.exports = Exchange;
 

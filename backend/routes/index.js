@@ -10,9 +10,23 @@ var router = express.Router();
 let fs = require('fs-extra');
 const path = require('path');
 var multer = require('multer');
-
-
 router.get('/files', function (req, res) {
+
+    const testFolder = './opportunities/' + req.query.company + '/';
+    console.log(req.query.company)
+    fs.readdir(testFolder, (err, files) => {
+        if (err) {
+            res.send("Error getting directory information.")
+        } else {
+
+            res.send(files);
+        }
+
+    });
+
+});
+
+router.get('/docs', function (req, res) {
 
     const testFolder = './documents/' + req.query.company + '/';
     console.log(req.query.company)
@@ -157,21 +171,21 @@ router.get('/categories', function (req, res) {
     });
 });
 router.get('/relations', function (req, res) {
-    Relation.find({}, function (err, states) {
+    Relation.find({}, function (err, relations) {
         if (err) return res.status(500).json({error: err});
-        res.json(states);
+        res.json(relations);
     });
 });
 router.get('/exchanges', function (req, res) {
-    Exchange.find({}, function (err, states) {
+    Exchange.find({}, function (err, exchanges) {
         if (err) return res.status(500).json({error: err});
-        res.json(states);
+        res.json(exchanges);
     });
 });
 router.get('/tags', function (req, res) {
-    Tag.find({}, function (err, states) {
+    Tag.find({}, function (err, tags) {
         if (err) return res.status(500).json({error: err});
-        res.json(states);
+        res.json(tags);
     });
 });
 
@@ -202,43 +216,59 @@ router.get('/tags', function (req, res) {
         res.status(201).json(newEvent + err);
     })
 });*/
+var company = "";
 let uploadOpp = multer({
     storage: multer.diskStorage({
         destination: (req, file, callback) => {
-            let company = req.body.company;
-            let path = `./opportunities//${company}`;
-            fs.mkdirsSync(path);
-            callback(null, path);
+            Client.find({_id: req.body.clientId}, function (err, client) {
+                if (client == "" || client == undefined) {
+                    res.send("Cliente non trovato")
+                } else {
+                    console.log("client", client);
+
+                    console.log("clientcomp", client[0].company);
+                    company = client[0].company;
+                    let path = `./opportunities//${company}`;
+                    fs.mkdirsSync(path);
+                    callback(null, path);
+                }
+            });
+
+
         },
         filename: (req, file, callback) => {
             //originalname is the uploaded file's name with extn
             callback(null, file.originalname);
         }
+
     })
+
 });
 router.post('/opportunity/', uploadOpp.single('doc'), (req, res) => {
+    Client.find({_id: req.body.clientId}, function (err, client) {
+        console.log("client", client[0].company);
+        const testFolder = './opportunities/' + client[0].company + '/';
+        console.log("testFolder", testFolder);
+        fs.readdir(testFolder, (err, files) => {
+            if (err) {
+                res.send("Error getting directory information." + err)
+            } else {
+                console.log(files);
+            }
+            var newOpp = Opportuniy({
+
+                name: req.body.name,
+                desc: req.body.desc,
+                clientId: req.body.clientId,
+                active: req.body.active,
+                files: files
 
 
-    const testFolder = './opportunities/' + req.body.company + '/';
-
-    fs.readdir(testFolder, (err, files) => {
-        if (err) {
-            res.send("Error getting directory information.")
-        } else {
-            console.log(files);
-        }
-        var newOpp = Opportuniy({
-
-            name: req.body.name,
-            desc: req.body.desc,
-            clientId: req.body.clientId,
-            active: req.body.active
-
-
+            });
+            newOpp.save(function (err) {
+                res.status(201).json(newOpp + " " + err + " Name Opportunity: " + req.body.name);
+            })
         });
-        newOpp.save(function (err) {
-            res.status(201).json(newOpp + " " + err + " Name Opportunity: " + req.body.name);
-        })
     });
 });
 router.post('/tag/', (req, res) => {
