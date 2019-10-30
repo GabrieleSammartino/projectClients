@@ -25,7 +25,6 @@ router.get('/files', function (req, res) {
     });
 
 });
-
 router.get('/docs', function (req, res) {
 
     const testFolder = './documents/' + req.query.company + '/';
@@ -48,9 +47,9 @@ router.get('/clients', function (req, res) {
     });
 });
 router.get('/opportunities', function (req, res) {
-    Opportuniy.find({}, function (err, clients) {
+    Opportuniy.find({}, function (err, opportunities) {
         if (err) return res.status(500).json({error: err});
-        res.json(clients);
+        res.json(opportunities);
     });
 });
 
@@ -66,7 +65,6 @@ router.get('/category', function (req, res) {
         res.json(categories);
     });
 });
-
 router.get('/docSearch', function (req, res) {
     if (!req.query.typologyId && !req.query.companyId && !req.query.categoryId) {
         Doc.find({
@@ -188,10 +186,22 @@ router.get('/tags', function (req, res) {
         res.json(tags);
     });
 });
+router.get('/oppclient', function (req, res) {
+    Opportuniy.find({clientId: req.query.clientId}, function (err, opportunities) {
+        if (err) return res.status(500).json({error: err});
+        res.json(opportunities);
+    });
+});
+
 
 
 /*router.post('/', upload.single('doc'), function (req, res) {
-    var sub = "uploads\\\\\\\\";
+    var srouter.get('/tags', function (req, res) {
+    Tag.find({}, function (err, tags) {
+        if (err) return res.status(500).json({error: err});
+        res.json(tags);
+    });
+});ub = "uploads\\\\\\\\";
     var newEvent = new Category({
         name: req.body.name,
         //description: req.body.description,

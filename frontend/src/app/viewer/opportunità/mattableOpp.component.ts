@@ -53,9 +53,9 @@ const SPACECRAFT_DATA: SpaceCraft[] = [
 
 
 @Component({
-    templateUrl: 'mattable.component.html'
+    templateUrl: 'mattableOpp.component.html'
 })
-export class MatTableComponent implements OnInit {
+export class MatTableComponentOpp implements OnInit {
     // @ts-ignore
     @ViewChild(MatPaginator) paginator: MatPaginator;
     // @ts-ignore

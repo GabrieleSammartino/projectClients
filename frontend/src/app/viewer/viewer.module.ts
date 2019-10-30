@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MatTableFilterModule } from 'mat-table-filter';
 
 import { TablesRoutes } from './viewer.routing';
-
+import {MatTableComponentOpp} from './opportunità/mattableOpp.component';
 import { ExtendedTableComponent } from './extendedtable/extendedtable.component';
 import { RegularTableComponent } from './regulartable/regulartable.component';
 import { DataTableComponent } from './datatable.net/datatable.component';
@@ -33,7 +33,8 @@ import {MatButtonModule} from '@angular/material/button';
         MatTableComponent,
         ExtendedTableComponent,
         DataTableComponent,
-        RegularTableComponent
+        RegularTableComponent,
+        MatTableComponentOpp
 
     ]
 })

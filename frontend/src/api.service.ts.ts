@@ -90,6 +90,30 @@ export class ApiService {
                 })
         })
     }
+    //GET OPPORTUNITIES
+
+    public getOpportunities(): Promise<any> {
+        return new Promise((resolve: Function, reject: Function) => {
+            this.http.get(this.url + '/opportunities/')
+                .map(res => res.json())
+                .subscribe(data => {
+                    resolve(data);
+                }, (error) => {
+                    resolve('Qualcosa non va' + error)
+                })
+        })
+    }
+    public getOppClient(clientId): Promise<any> {
+        return new Promise((resolve: Function, reject: Function) => {
+            this.http.get(this.url + '/oppclient/?clientId=' + clientId)
+                .map(res => res.json())
+                .subscribe(data => {
+                    resolve(data);
+                }, (error) => {
+                    resolve('Qualcosa non va' + error)
+                })
+        })
+    }
 //POST CLIENT
 
 

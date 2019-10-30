@@ -34,7 +34,9 @@ export const ROUTES: RouteInfo[] = [{
         {path: 'regular', title: 'Regular Tables', ab: 'RT'},
         {path: 'extended', title: 'Extended Tables', ab: 'ET'},
         {path: 'datatables.net', title: 'Datatables.net', ab: 'DT'},
-        {path: 'clienti', title: 'Clienti', ab: 'CT'}
+        {path: 'clienti', title: 'Clienti', ab: 'CT'},
+        {path: 'opportunità', title: 'Opportunità', ab: 'OT'}
+
     ]
 }, {
     path: '/create',

@@ -4,6 +4,7 @@ import { ExtendedTableComponent } from './extendedtable/extendedtable.component'
 import { RegularTableComponent } from './regulartable/regulartable.component';
 import { DataTableComponent } from './datatable.net/datatable.component';
 import {MatTableComponent} from './clienti/mattable.component';
+import {MatTableComponentOpp} from './opportunità/mattableOpp.component';
 
 export const TablesRoutes: Routes = [{
         path: '',
@@ -29,6 +30,13 @@ export const TablesRoutes: Routes = [{
         children: [ {
             path: 'clienti',
             component: MatTableComponent
+        }]
+    },
+    {
+        path: '',
+        children: [ {
+            path: 'opportunità',
+            component: MatTableComponentOpp
         }]
     }
 ];
