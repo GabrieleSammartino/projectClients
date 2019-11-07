@@ -6,6 +6,8 @@ var opportunitySchema = mongoose.Schema({
     desc: {type: String, minlength: 2},
     clientId: {type: String, required: true},
     active: {type: Boolean, required: true},
+    company: {type: String, minlength: 2},
+
     files: []
 
 

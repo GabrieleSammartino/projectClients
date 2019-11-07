@@ -186,13 +186,18 @@ router.get('/tags', function (req, res) {
         res.json(tags);
     });
 });
+router.get('/client/', function (req, res) {
+    Client.findOne({_id: req.query.id}, function (err, client) {
+        if (err) return res.status(500).json({error: err});
+        res.json(client);
+    });
+});
 router.get('/oppclient', function (req, res) {
     Opportuniy.find({clientId: req.query.clientId}, function (err, opportunities) {
         if (err) return res.status(500).json({error: err});
         res.json(opportunities);
     });
 });
-
 
 
 /*router.post('/', upload.single('doc'), function (req, res) {
@@ -268,6 +273,7 @@ router.post('/opportunity/', uploadOpp.single('doc'), (req, res) => {
             var newOpp = Opportuniy({
 
                 name: req.body.name,
+                company: client[0].company,
                 desc: req.body.desc,
                 clientId: req.body.clientId,
                 active: req.body.active,
@@ -428,36 +434,100 @@ let upload = multer({
         }
     })
 });
-router.post('/client', upload.single('doc'), (req, res) => {
+router.post('/client', upload.fields([{
+    name: 'doc', maxCount: 1
+}, {
+    name: 'checkDoc', maxCount: 1
+}]), (req, res) => {
 
     const testFolder = './documents/' + req.body.company + '/';
 
     fs.readdir(testFolder, (err, files) => {
         if (err) {
-            res.send("Error getting directory information.")
+            var files = ["",""];
+
+            console.log("Error getting directory information.")
+            var newClient = Client({
+                company: req.body.company,
+                name: req.body.name,
+                relationId: req.body.relationId,
+                categoryId: req.body.categoryId,
+                exchangeId: req.body.exchangeId,
+                stateId: req.body.stateId,
+                typoOpp: req.body.typoOpp,
+                descOpp: req.body.descOpp,
+                note: req.body.note,
+                typoAct: req.body.typoAct,
+                url: req.body.url,
+                email: req.body.email,
+                tagIds: req.body.tagIds,
+
+            });
         } else {
             console.log(files);
         }
 
 
-        var newClient = Client({
-            company: req.body.company,
-            name: req.body.name,
-            relationId: req.body.relationId,
-            categoryId: req.body.categoryId,
-            exchangeId: req.body.exchangeId,
-            stateId: req.body.stateId,
-            typoOpp: req.body.typoOpp,
-            descOpp: req.body.descOpp,
-            note: req.body.note,
-            typoAct: req.body.typoAct,
-            url: req.body.url,
-            tagIds: req.body.tagIds,
-            arrayDocs: files //req.file.path.substring(10, req.file.path.length)
-        });
-        newClient.save(function (err) {
-            res.status(201).json(newClient + err);
-        })
+        if (files[0] != "") {
+            var newClient = Client({
+                company: req.body.company,
+                name: req.body.name,
+                relationId: req.body.relationId,
+                categoryId: req.body.categoryId,
+                exchangeId: req.body.exchangeId,
+                stateId: req.body.stateId,
+                typoOpp: req.body.typoOpp,
+                descOpp: req.body.descOpp,
+                note: req.body.note,
+                typoAct: req.body.typoAct,
+                url: req.body.url,
+                email: req.body.email,
+                tagIds: req.body.tagIds,
+                checkDoc: files[0]
+            });
+        }
+        if (files[1] != "") {
+            var newClient = Client({
+                company: req.body.company,
+                name: req.body.name,
+                relationId: req.body.relationId,
+                categoryId: req.body.categoryId,
+                exchangeId: req.body.exchangeId,
+                stateId: req.body.stateId,
+                typoOpp: req.body.typoOpp,
+                descOpp: req.body.descOpp,
+                note: req.body.note,
+                email: req.body.email,
+                typoAct: req.body.typoAct,
+                url: req.body.url,
+                tagIds: req.body.tagIds,
+                arrayDocs: files[1], //req.file.path.substring(10, req.file.path.length)
+            });
+        }
+        if (files[1] != "" & files[0] != "") {
+            var newClient = Client({
+                company: req.body.company,
+                name: req.body.name,
+                relationId: req.body.relationId,
+                categoryId: req.body.categoryId,
+                exchangeId: req.body.exchangeId,
+                stateId: req.body.stateId,
+                typoOpp: req.body.typoOpp,
+                descOpp: req.body.descOpp,
+                note: req.body.note,
+                typoAct: req.body.typoAct,
+                url: req.body.url,
+                email: req.body.email,
+                tagIds: req.body.tagIds,
+                arrayDocs: files[1], //req.file.path.substring(10, req.file.path.length)
+                checkDoc: files[0]
+
+            });
+        }
+
+         newClient.save(function (err) {
+        res.status(201).json(newClient + err);
+            })
     });
 
 

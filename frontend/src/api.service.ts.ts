@@ -113,9 +113,54 @@ export class ApiService {
                     resolve('Qualcosa non va' + error)
                 })
         })
+    }public getClient(clientId): Promise<any> {
+        return new Promise((resolve: Function, reject: Function) => {
+            this.http.get(this.url + '/client/?id=' + clientId)
+                .map(res => res.json())
+                .subscribe(data => {
+                    resolve(data);
+                }, (error) => {
+                    resolve('Qualcosa non va' + error)
+                })
+        })
     }
-//POST CLIENT
+    //POST CATEGORY
+    public newCategory(category): Promise<any> {
+        return new Promise((resolve: Function, reject: Function) => {
+            this.http.post(this.url + '/category/', category, '')
+                .map(res => res.json())
+                .subscribe(data => {
+                    resolve(data);
+                }, (error) => {
+                    resolve('Qualcosa non va')
+                })
+        })
+    }
 
+//POST CLIENT
+    public newClient(client): Promise<any> {
+        return new Promise((resolve: Function, reject: Function) => {
+            this.http.post(this.url + '/client/', client, '')
+                .map(res => res.json())
+                .subscribe(data => {
+                    resolve(data);
+                }, (error) => {
+                    resolve('Qualcosa non va')
+                })
+        })
+    }
+    //PUT BOOKING DATES
+    public putBookingDates(bookingId, bookingStart, bookingEnd): Promise<any> {
+        return new Promise((resolve: Function, reject: Function) => {
+            this.http.put(this.url + '/bookings/edit/' + bookingId + '?bookingStart=' + bookingStart + '&bookingEnd=' + bookingEnd , '', '')
+                .map(res => res.json())
+                .subscribe(data => {
+                    resolve(data);
+                }, (error) => {
+                    resolve('Qualcosa non va')
+                })
+        })
+    }
 
 
 

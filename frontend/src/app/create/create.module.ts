@@ -15,7 +15,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 
-import {ClientComponent} from './client/client.component';
+import {ClientcreateComponent} from './client/clientcreate.component';
 import {OptionsComponent} from './options/options.component';
 
 @NgModule({
@@ -30,7 +30,7 @@ import {OptionsComponent} from './options/options.component';
         MatTableFilterModule
     ],
     declarations: [
-        ClientComponent,
+        ClientcreateComponent,
         OptionsComponent
 
     ]

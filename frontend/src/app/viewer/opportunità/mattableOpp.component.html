@@ -1,33 +1,43 @@
 <div class="main-content">
     <mat-table matTableFilter [exampleEntity]="filterEntity"
-               [filterType]="filterType" [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="company">
+               [filterType]="filterType" [dataSource]="dataSourceOpp" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef>
                 <mat-form-field appearance="outline">
-                    <input matInput placeholder="company" [(ngModel)]="filterEntity.company">
+                    <input matInput placeholder="nome" [(ngModel)]="filterEntity.name">
+                </mat-form-field>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+       <ng-container matColumnDef="company">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="Azienda" [(ngModel)]="filterEntity.company">
                 </mat-form-field>
             </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.company}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="desc">
             <mat-header-cell *matHeaderCellDef>
                 <mat-form-field appearance="outline">
-                    <input matInput placeholder="name" [(ngModel)]="filterEntity.name">
+                    <input matInput placeholder="Descrizione" [(ngModel)]="filterEntity.desc">
                 </mat-form-field>
             </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.desc}} </mat-cell>
         </ng-container>
+        <ng-container matColumnDef="active">
+            <mat-header-cell *matHeaderCellDef>
+                <mat-form-field appearance="outline">
+                    <input matInput placeholder="Attivo" [(ngModel)]="filterEntity.active">
 
-        <ng-container matColumnDef="exchangeId">
-            <mat-header-cell *matHeaderCellDef>
-                <mat-form-field appearance="outline">
-                    <input matInput placeholder="exchangeId" [(ngModel)]="filterEntity.exchangeId">
+
                 </mat-form-field>
             </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.exchangeId}} </mat-cell>
+            <mat-cell *matCellDef="let element">  <i *ngIf="element.active == true" class="nc-icon nc-check-2"></i> </mat-cell>
+
         </ng-container>
-        <ng-container matColumnDef="relationId">
+<!--        <ng-container matColumnDef="relationId">
             <mat-header-cell *matHeaderCellDef>
                 <mat-form-field appearance="outline">
                     <input matInput placeholder="relationId" [(ngModel)]="filterEntity.relationId">
@@ -95,7 +105,7 @@
                 </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.opportunitiesAct + "/" + element.opportunitiesTot}}
                 </mat-cell>
-        </ng-container>
+        </ng-container>-->
 
 
         <!--<ng-container matColumnDef="isConstitutionClass">

@@ -5,6 +5,7 @@ import { RegularTableComponent } from './regulartable/regulartable.component';
 import { DataTableComponent } from './datatable.net/datatable.component';
 import {MatTableComponent} from './clienti/mattable.component';
 import {MatTableComponentOpp} from './opportunità/mattableOpp.component';
+import {ClientComponent} from "./clientpage/client.component";
 
 export const TablesRoutes: Routes = [{
         path: '',
@@ -37,6 +38,13 @@ export const TablesRoutes: Routes = [{
         children: [ {
             path: 'opportunità',
             component: MatTableComponentOpp
+        }]
+    },
+    {
+        path: '',
+        children: [ {
+            path: 'client',
+            component: ClientComponent
         }]
     }
 ];

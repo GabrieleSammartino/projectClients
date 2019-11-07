@@ -200,5 +200,11 @@ getOppCl(clientId) {
 
         })
 }
+    onRowClicked(row) {
 
+        console.log('Row clicked: ', row);
+         console.log("clientRow",row._id)
+        localStorage.setItem('idClient', row._id);
+        this.router.navigate(['/viewer/client/']);
+    }
 }

@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 
-import {ClientComponent} from './client/client.component';
+import {ClientcreateComponent} from './client/clientcreate.component';
 import {OptionsComponent} from './options/options.component';
 
 export const CreateRoutes: Routes = [{
         path: '',
         children: [{
             path: 'client',
-            component: ClientComponent
+            component: ClientcreateComponent
         }]
     }, {
         path: '',
