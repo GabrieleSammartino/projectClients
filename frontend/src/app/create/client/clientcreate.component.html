@@ -45,7 +45,7 @@
               <label class="col-md-3 col-form-label">Azienda</label>
               <div class="col-md-9">
                 <div class="form-group">
-                  <input type="text" class="form-control" placeholder="Username">
+                  <input  [required]="true" [ngModelOptions]="{standalone: true}"  [(ngModel)]="company" name="company"  type="text" class="form-control" placeholder="Azienda" required>
                 </div>
               </div>
             </div>
@@ -53,7 +53,7 @@
               <label class="col-md-3 col-form-label">Nome Persona Chiave</label>
               <div class="col-md-9">
                 <div class="form-group">
-                  <input type="email" class="form-control" placeholder="Email">
+                  <input type="text" [ngModelOptions]="{standalone: true}"  [(ngModel)]="name"  name="name"  class="form-control" placeholder="Nome Persona chiave">
                 </div>
               </div>
             </div>
@@ -61,300 +61,156 @@
               <label class="col-md-3 col-form-label">Email</label>
               <div class="col-md-9">
                 <div class="form-group">
-                  <input type="password" class="form-control" placeholder="Password">
+                  <input  type="email"  name="email"  [ngModelOptions]="{standalone: true}"  [(ngModel)]="email"  class="form-control" placeholder="Email"
+                          required  pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
                 </div>
               </div>
             </div>
             <div class="row">
-              <label class="col-md-3 col-form-label">Email</label>
+              <label class="col-md-3 col-form-label">Tipo Opportunità</label>
               <div class="col-md-9">
                 <div class="form-group">
-                  <input type="password" class="form-control" placeholder="Password">
+                  <input type="text" [ngModelOptions]="{standalone: true}"  [(ngModel)]="typoOpp" name="typoOpp"  class="form-control" placeholder="Tipo Opportunità">
                 </div>
               </div>
-            </div><div class="row">
-            <label class="col-md-3 col-form-label">Email</label>
-            <div class="col-md-9">
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password">
+            </div>
+            <div class="row">
+              <label class="col-md-3 col-form-label">Descrizione Opportunità</label>
+              <div class="col-md-9">
+                <div class="form-group">
+                  <input type="text" [ngModelOptions]="{standalone: true}"  [(ngModel)]="descOpp" name="descOpp"   class="form-control" placeholder="Descrizione Opportunità">
+                </div>
               </div>
             </div>
-          </div><div class="row">
-            <label class="col-md-3 col-form-label">Email</label>
+            <div class="row">
+            <label class="col-md-3 col-form-label">Sito Web</label>
             <div class="col-md-9">
               <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password">
+                <input [ngModelOptions]="{standalone: true}"  [(ngModel)]="url"  name="url"  type="url" class="form-control" placeholder="Url">
               </div>
             </div>
           </div>
             <div class="row">
-            <label class="col-md-3 col-form-label">Email</label>
+            <label class="col-md-3 col-form-label">Tipo Attività</label>
             <div class="col-md-9">
               <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="text" [ngModelOptions]="{standalone: true}"  [(ngModel)]="typoAct"   name="typoAct" class="form-control" placeholder="Tipo Attività">
               </div>
             </div>
           </div>
             <div class="row">
-            <label class="col-md-3 col-form-label">Email</label>
+            <label class="col-md-3 col-form-label">Note</label>
             <div class="col-md-9">
               <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password">
+                <input type="textarea" name="note" [ngModelOptions]="{standalone: true}"  [(ngModel)]="note" [ngModelOptions]="{standalone: true}"    class="form-control" placeholder="Note">
               </div>
             </div>
           </div>
-            <div class="row">
+            <div *ngIf="reloadCat==false" class="row">
               <label class="col-md-3 col-form-label">Categoria</label>
-              <div *ngIf="catNew == true">
-                <select   class="selectpicker" [(ngModel)]="categoryId" data-size="7" data-style="btn btn-primary btn-round" title="Single Select">
+                <select   class="selectpicker" [ngModelOptions]="{standalone: true}" [ngModelOptions]="{standalone: true}"  [(ngModel)]="categoryId" data-size="7" data-style="btn btn-primary btn-round" title="Categoria">
                   <option disabled selected>Categoria</option>
                   <option  [value]="category._id" *ngFor="let category of categories">  {{category.name}}</option>
                 </select>
-              </div>
-              <div *ngIf="catNew == false" >
-                <select  class="selectpicker" [(ngModel)]="categoryId" data-size="7" data-style="btn btn-primary btn-round" title="Single Select">
-                  <option disabled selected>Categoria</option>
-                  <option  [value]="category._id" *ngFor="let category of categories">  {{category.name}}</option>
-                </select>
-              </div>
-              {{catNew}}
               <label class="col-md-3 col-form-label">Aggiungi Categoria</label>
               <div class="col-md-3">
                 <div class="form-group">
-                  <input type="text"   name="catName"   [(ngModel)]="catName" class="form-control" placeholder="Categoria">
+                  <input type="text"   name="catName"   [ngModelOptions]="{standalone: true}"  [ngModelOptions]="{standalone: true}"  [(ngModel)]="catName" class="form-control" placeholder="Categoria">
                  <button> <i (click)="add('cat')"class="nc-icon nc-simple-add">Aggiungi</i></button>
                 </div>
               </div>
             </div>
+            <div *ngIf="reloadCat==true" class="row">
+              <label class="col-md-3 col-form-label">Categoria</label>
+              <select   class="selectpicker" [ngModelOptions]="{standalone: true}" [ngModelOptions]="{standalone: true}"  [(ngModel)]="categoryId" data-size="7" data-style="btn btn-primary btn-round" title="Categoria">
+                <option disabled selected>Categoria</option>
+                <option  [value]="category._id" *ngFor="let category of categories">  {{category.name}}</option>
+              </select>
+              <label class="col-md-3 col-form-label">Aggiungi Categoria</label>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text"   name="catName"   [ngModelOptions]="{standalone: true}"  [ngModelOptions]="{standalone: true}"  [(ngModel)]="catName" class="form-control" placeholder="Categoria">
+                  <button> <i (click)="add('cat')"class="nc-icon nc-simple-add">Aggiungi</i></button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-md-3 col-form-label">Stato Sede</label>
+              <select   class="selectpicker" [ngModelOptions]="{standalone: true}"  [ngModelOptions]="{standalone: true}"  [(ngModel)]="stateId" data-size="7" data-style="btn btn-primary btn-round" title="Stato">
+                <option disabled selected>Stato Sede</option>
+                <option  [value]="state._id" *ngFor="let state of states">  {{state.name}}</option>
+              </select>
+              <label class="col-md-3 col-form-label">Aggiungi Stato</label>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text"   name="statName"   [ngModelOptions]="{standalone: true}"  [(ngModel)]="statName" class="form-control" placeholder="Sede">
+                  <button> <i (click)="add('stat')"class="nc-icon nc-simple-add">Aggiungi</i></button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-md-3 col-form-label">Relazione</label>
+              <select   class="selectpicker" [ngModelOptions]="{standalone: true}"  [(ngModel)]="relationId" data-size="7" data-style="btn btn-primary btn-round" title="Relazione">
+                <option disabled selected>Relazione</option>
+                <option  [value]="relation._id" *ngFor="let relation of relations">  {{relation.name}}</option>
+              </select>
+              <label class="col-md-3 col-form-label">Aggiungi Relazione</label>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text"   name="relName"   [ngModelOptions]="{standalone: true}"  [(ngModel)]="relName" class="form-control" placeholder="Relazione">
+                  <button> <i (click)="add('rel')"class="nc-icon nc-simple-add">Aggiungi</i></button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label class="col-md-3 col-form-label">Mercato</label>
+              <select   class="selectpicker" [ngModelOptions]="{standalone: true}"  [(ngModel)]="exchangeId" data-size="7" data-style="btn btn-primary btn-round" title="Mercato">
+                <option disabled selected> Mercato </option>
+                <option  [value]="exchange._id" *ngFor="let exchange of exchanges">  {{exchange.name}}</option>
+              </select>
 
+              <label class="col-md-3 col-form-label">Aggiungi Mercato</label>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text"   name="excName"   [ngModelOptions]="{standalone: true}"  [(ngModel)]="excName" class="form-control" placeholder="Mercato">
+                  <button> <i (click)="add('exc')"class="nc-icon nc-simple-add">Aggiungi</i></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <label class="col-md-6 col-form-label">Tag
+              <select (keyup)="addTag($event)"    class="selectpicker" [ngModelOptions]="{standalone: true}" multiple [(ngModel)]="tagSId" data-size="7" data-style="btn btn-info btn-round" title="Tag">
+                <option disabled selected>Tag</option>
+                <option  [value]="tag._id" *ngFor="let tag of tags">  {{tag.name}}</option>
+              </select>
+              </label>
+              <label class="col-md-3 col-form-label">Aggiungi Tag</label>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input type="text"   name="tagName"   [ngModelOptions]="{standalone: true}"  [(ngModel)]="tagName" class="form-control" placeholder="Tag">
+                  <button> <i (click)="add('tag')"class="nc-icon nc-simple-add">Aggiungi</i></button>
+                </div>
+              </div>
+            </div>
+            <input type="file"
+                   id="doc"
+                   (change)="handleFileInput($event.target.files)">
+            <input type="file"
+                   id="checkdoc"
+                   (change)="handleFileInput2($event.target.files)">
           </form>
         </div>
         <div class="card-footer ">
           <div class="row">
             <label class="col-md-3"></label>
             <div class="col-md-9">
-              <button type="submit" class="btn btn-info btn-round">Sign in</button>
+              <button (click)="createClient()" type="submit" class="btn btn-info btn-round">Crea</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-md-12">
-      <div class="card ">
-        <div class="card-header ">
-          <h4 class="card-title">Form Elements</h4>
-        </div>
-        <div class="card-body ">
-          <form method="get" action="/" class="form-horizontal">
-            <div class="row">
-              <label class="col-sm-2 col-form-label">With help</label>
-              <div class="col-sm-10">
-                <div class="form-group">
-                  <input type="text" class="form-control">
-                  <span class="form-text">A block of help text that breaks onto a new line.</span>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <label class="col-sm-2 col-form-label">Password</label>
-              <div class="col-sm-10">
-                <div class="form-group">
-                  <input type="password" class="form-control">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <label class="col-sm-2 col-form-label">Placeholder</label>
-              <div class="col-sm-10">
-                <div class="form-group">
-                  <input type="text" class="form-control" placeholder="placeholder">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <label class="col-sm-2 col-form-label">Disabled</label>
-              <div class="col-sm-10">
-                <div class="form-group">
-                  <input type="text" class="form-control" value="Disabled input here.." disabled>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <label class="col-sm-2 col-form-label">Static control</label>
-              <div class="col-sm-10">
-                <div class="form-group">
-                  <p class="form-control-static">hello@creative-tim.com</p>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <label class="col-sm-2 col-form-label">Checkboxes and radios</label>
-              <div class="col-sm-10 checkbox-radios">
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox">
-                    <span class="form-check-sign"></span>
-                    First Checkbox
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox">
-                    <span class="form-check-sign"></span>
-                    Second Checkbox
-                  </label>
-                </div>
-                <div class="form-check-radio">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadioz" id="exampleRadios11" value="option1"> First Radio
-                    <span class="form-check-sign"></span>
-                  </label>
-                </div>
-                <div class="form-check-radio">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadioz" id="exampleRadios12" value="option2" checked=""> Second Radio
-                    <span class="form-check-sign"></span>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <label class="col-sm-2 col-form-label">Inline checkboxes</label>
-              <div class="col-sm-10">
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" checked>
-                    <span class="form-check-sign"></span>
-                    a
-                  </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox">
-                    <span class="form-check-sign"></span>
-                    b
-                  </label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox">
-                    <span class="form-check-sign"></span>
-                    c
-                  </label>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="card ">
-        <div class="card-header ">
-          <h4 class="card-title">Input Variants</h4>
-        </div>
-        <div class="card-body ">
-          <form method="get" action="/" class="form-horizontal">
-            <div class="row">
-              <label class="col-sm-2 col-form-label">Custom Checkboxes &amp; radios</label>
-              <div class="col-sm-4 col-sm-offset-1 checkbox-radios">
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox">
-                    <span class="form-check-sign"></span>
-                    Unchecked
-                  </label>
-                </div>
-                <div class="form-check">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" checked>
-                    <span class="form-check-sign"></span>
-                    Checked
-                  </label>
-                </div>
-                <div class="form-check disabled">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" disabled>
-                    <span class="form-check-sign"></span>
-                    Disabled Unchecked
-                  </label>
-                </div>
-                <div class="form-check disabled">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" disabled>
-                    <span class="form-check-sign"></span>
-                    Disabled Checked
-                  </label>
-                </div>
-              </div>
-              <div class="col-sm-6 col-lg-3">
-                <div class="form-check-radio">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"> Radio is off
-                    <span class="form-check-sign"></span>
-                  </label>
-                </div>
-                <div class="form-check-radio">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" checked=""> Radio is on
-                    <span class="form-check-sign"></span>
-                  </label>
-                </div>
-                <div class="form-check-radio disabled">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3" disabled=""> Disabled radio is off
-                    <span class="form-check-sign"></span>
-                  </label>
-                </div>
-                <div class="form-check-radio disabled">
-                  <label class="form-check-label">
-                    <input class="form-check-input" type="radio" name="exampleRadioz" id="exampleRadios4" value="option4" checked="" disabled=""> Disabled radio is on
-                    <span class="form-check-sign"></span>
-                  </label>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <label class="col-sm-2 col-form-label">Input with success</label>
-              <div class="col-sm-10">
-                <div class="form-group has-success">
-                  <input type="text" class="form-control" value="Success">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <label class="col-sm-2 col-form-label">Input with error</label>
-              <div class="col-sm-10">
-                <div class="form-group has-danger">
-                  <input type="text" class="form-control" value="Error">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <label class="col-sm-2 col-form-label">Column sizing</label>
-              <div class="col-sm-10">
-                <div class="row">
-                  <div class="col-md-3">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder=".col-md-3">
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder=".col-md-4">
-                    </div>
-                  </div>
-                  <div class="col-md-5">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder=".col-md-5">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
+

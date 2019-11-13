@@ -20,20 +20,20 @@ export interface ChildrenItems {
 
 //Menu Items
 export const ROUTES: RouteInfo[] = [{
-    path: '/dashboard',
+/*    path: '/dashboard',
     title: 'Dashboard',
     type: 'link',
     icontype: 'nc-icon nc-bank'
-}, {
+}, {*/
     path: '/viewer',
     title: 'Visualizza',
     type: 'sub',
     collapse: 'viewer',
     icontype: 'nc-icon nc-single-copy-04',
     children: [
-        {path: 'regular', title: 'Regular Tables', ab: 'RT'},
+       /* {path: 'regular', title: 'Regular Tables', ab: 'RT'},
         {path: 'extended', title: 'Extended Tables', ab: 'ET'},
-        {path: 'datatables.net', title: 'Datatables.net', ab: 'DT'},
+        {path: 'datatables.net', title: 'Datatables.net', ab: 'DT'},*/
         {path: 'clienti', title: 'Clienti', ab: 'CT'},
         {path: 'opportunità', title: 'Opportunità', ab: 'OT'}
 
@@ -43,12 +43,12 @@ export const ROUTES: RouteInfo[] = [{
     title: 'Crea',
     type: 'sub',
     collapse: 'create',
-    icontype: 'nc-icon nc-single-copy-04',
+    icontype: 'nc-icon nc-simple-add',
     children: [
         {path: 'client', title: 'Cliente', ab: 'CT'},
         {path: 'options', title: 'Opzioni', ab: 'OP'}
     ]
-}, {
+}/*, {
     path: '/components',
     title: 'Components',
     type: 'sub',
@@ -127,7 +127,7 @@ export const ROUTES: RouteInfo[] = [{
         {path: 'register', title: 'Register Page', ab: 'RP'},
         {path: 'lock', title: 'Lock Screen Page', ab: 'LSP'}
     ]
-}
+}*/
 ];
 
 @Component({

@@ -205,6 +205,11 @@ getOppCl(clientId) {
         console.log('Row clicked: ', row);
          console.log("clientRow",row._id)
         localStorage.setItem('idClient', row._id);
+        localStorage.setItem('category', row.categoryId);
+        localStorage.setItem('state', row.stateId);
+        localStorage.setItem('exchange', row.exchangeId);
+        localStorage.setItem('relation', row.relationId);
+
         this.router.navigate(['/viewer/client/']);
     }
 }

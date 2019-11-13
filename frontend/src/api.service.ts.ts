@@ -124,6 +124,56 @@ export class ApiService {
                 })
         })
     }
+    //POST STATE
+    public newState(state): Promise<any> {
+        return new Promise((resolve: Function, reject: Function) => {
+            this.http.post(this.url + '/state/', state, '')
+                .map(res => res.json())
+                .subscribe(data => {
+                    resolve(data);
+                }, (error) => {
+                    resolve('Qualcosa non va')
+                })
+        })
+    }
+    //POST RELATION
+    public newRelation(relation): Promise<any> {
+        return new Promise((resolve: Function, reject: Function) => {
+            this.http.post(this.url + '/relation/', relation, '')
+                .map(res => res.json())
+                .subscribe(data => {
+                    resolve(data);
+                }, (error) => {
+                    resolve('Qualcosa non va')
+                })
+        })
+    }
+    //POST TAG
+    public newTag(tag): Promise<any> {
+        return new Promise((resolve: Function, reject: Function) => {
+            this.http.post(this.url + '/tag/', tag, '')
+                .map(res => res.json())
+                .subscribe(data => {
+                    resolve(data);
+                }, (error) => {
+                    resolve('Qualcosa non va')
+                })
+        })
+    }
+    //POST EXCHANGE
+    public newExchange(exchange): Promise<any> {
+        return new Promise((resolve: Function, reject: Function) => {
+            this.http.post(this.url + '/exchange/', exchange, '')
+                .map(res => res.json())
+                .subscribe(data => {
+                    resolve(data);
+                }, (error) => {
+                    resolve('Qualcosa non va')
+                })
+        })
+    }
+
+
     //POST CATEGORY
     public newCategory(category): Promise<any> {
         return new Promise((resolve: Function, reject: Function) => {
@@ -145,7 +195,7 @@ export class ApiService {
                 .subscribe(data => {
                     resolve(data);
                 }, (error) => {
-                    resolve('Qualcosa non va')
+                    resolve(error)
                 })
         })
     }

@@ -1,0 +1,370 @@
+<div class="main-content">
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="card card-user">
+                <!--<div class="image">
+                  <img src="./assets/img/bg/damir-bosnjak.jpg" alt="...">
+                </div>-->
+                <div class="card-body">
+                    <div class="author">
+                        <!--            <a href="javascript:void(0)">-->
+                        <!--              <img class="avatar border-gray" src="./assets/img/mike.jpg" alt="...">-->
+                        <br>
+                        <br>
+                        <br>
+                        <br> <br>
+                        <br> <br>
+                        <br>
+                        <h5 class="title">{{client?.company}}</h5>
+                        <!--            </a>-->
+                        <p class="description">
+
+                        </p>
+                    </div>
+                    <p class="description text-center">
+                        {{client?.name}}
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <hr>
+                    <div class="button-container">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                                <h5>12
+                                    <br>
+                                    <small>Files</small>
+                                </h5>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+                                <h5>2GB
+                                    <br>
+                                    <small>Used</small>
+                                </h5>
+                            </div>
+                            <div class="col-lg-3 mr-auto">
+                                <h5>24,6$
+                                    <br>
+                                    <small>Spent</small>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Opportunità</h4>
+                </div>
+                <div class="card-body">
+                    <mat-table matTableFilter [exampleEntity]="filterEntity"
+                               [filterType]="filterType" [dataSource]="dataSourceOpp" class="mat-elevation-z8">
+                        <ng-container matColumnDef="name">
+                            <mat-header-cell *matHeaderCellDef>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="nome" [(ngModel)]="filterEntity.name">
+                                </mat-form-field>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                        </ng-container>
+
+                        <ng-container matColumnDef="desc">
+                            <mat-header-cell *matHeaderCellDef>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="Descrizione" [(ngModel)]="filterEntity.desc">
+                                </mat-form-field>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.desc}} </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="active">
+                            <mat-header-cell *matHeaderCellDef>
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="Attivo" [(ngModel)]="filterEntity.active">
+
+
+                                </mat-form-field>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element">  <i *ngIf="element.active == true" class="nc-icon nc-check-2"></i> </mat-cell>
+
+                        </ng-container>
+                        <!--        <ng-container matColumnDef="relationId">
+                                    <mat-header-cell *matHeaderCellDef>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput placeholder="relationId" [(ngModel)]="filterEntity.relationId">
+                                        </mat-form-field>
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.relationId}} </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="stateId">
+                                    <mat-header-cell *matHeaderCellDef>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput placeholder="Stato" [(ngModel)]="filterEntity.stateId">
+                                        </mat-form-field>
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.stateId}} </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="categoryId">
+                                    <mat-header-cell *matHeaderCellDef>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput placeholder="categoryId" [(ngModel)]="filterEntity.categoryId">
+                                        </mat-form-field>
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.categoryId}} </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="url">
+                                    <mat-header-cell *matHeaderCellDef>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput placeholder="url" [(ngModel)]="filterEntity.url">
+                                        </mat-form-field>
+                                    </mat-header-cell>
+
+                                    <mat-cell *matCellDef="let element">
+                                        <button *ngIf="element.url != 0 || element.url != ''" (click)="goToUrl(element.url)"
+                                                class="btn btn-primary btn-sm">Vai al sito
+                                        </button>
+                                    </mat-cell>
+
+                                </ng-container>
+                                <ng-container matColumnDef="typoAct">
+                                    <mat-header-cell *matHeaderCellDef>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput placeholder="typoAct" [(ngModel)]="filterEntity.typoAct">
+                                        </mat-form-field>
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.typoAct}} </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="tag">
+                                    <mat-header-cell *matHeaderCellDef>
+                                        <mat-form-field appearance="outline">
+                                            <input matInput placeholder="tag" [(ngModel)]="filterEntity.tagId">
+
+                                        </mat-form-field>
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let element"> {{element.tagId}}
+                                        <button (click)="getOppCl(element._id)"
+                                                class="btn btn-primary btn-sm">Test
+                                        </button>
+                                    </mat-cell>
+                                </ng-container>
+                                    <ng-container matColumnDef="opportunities">
+                                        <mat-header-cell *matHeaderCellDef>
+                                            <mat-form-field appearance="outline">
+                                                <input matInput placeholder="Attive/Totali">
+
+                                            </mat-form-field>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.opportunitiesAct + "/" + element.opportunitiesTot}}
+                                        </mat-cell>
+                                </ng-container>-->
+
+
+                        <!--<ng-container matColumnDef="isConstitutionClass">
+                            <mat-header-cell *matHeaderCellDef>
+                                <mat-checkbox class="example-margin" [(ngModel)]="filterEntity.isConstitutionClass">Constitution Class</mat-checkbox>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.isConstitutionClass}} </mat-cell>
+                        </ng-container>-->
+
+                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+                    </mat-table>
+                    <mat-paginator [pageSizeOptions]="[30, 60]"></mat-paginator>
+<!--
+                    <ul class="list-unstyled team-members">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-2 col-2">
+                                    <div class="avatar">
+                                        <img src="./assets/img/faces/ayo-ogunseinde-2.jpg" alt="Circle Image"
+                                             class="img-circle img-no-padding img-responsive">
+                                    </div>
+                                </div>
+                                <div class="col-md-7 col-7">
+                                    {{client?.name}}
+                                    <br/>
+
+                                </div>
+                                <div class="col-md-3 col-3 text-right">
+                                    <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i
+                                            class="fa fa-envelope"></i></button>
+                                </div>
+                            </div>
+                        </li>
+                        &lt;!&ndash; <li>
+                           <div class="row">
+                             <div class="col-md-2 col-2">
+                               <div class="avatar">
+                                 <img src="./assets/img/faces/joe-gardner-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                               </div>
+                             </div>
+                             <div class="col-md-7 col-7">
+                               Creative Tim
+                               <br />
+                               <span class="text-success">
+                                 <small>Available</small>
+                               </span>
+                             </div>
+                             <div class="col-md-3 col-3 text-right">
+                               <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
+                             </div>
+                           </div>
+                         </li>
+                         <li>
+                           <div class="row">
+                             <div class="col-md-2 col-2">
+                               <div class="avatar">
+                                 <img src="./assets/img/faces/clem-onojeghuo-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                               </div>
+                             </div>
+                             <div class="col-ms-7 col-7">
+                               Flume
+                               <br />
+                               <span class="text-danger">
+                                 <small>Busy</small>
+                               </span>
+                             </div>
+                             <div class="col-md-3 col-3 text-right">
+                               <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
+                             </div>
+                           </div>
+                         </li>&ndash;&gt;
+                    </ul>
+-->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Profilo</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-md-5 pr-1">
+                                <div class="form-group">
+                                    <label>Azienda </label>
+                                    <input type="text" class="form-control" disabled="" placeholder="Company"
+                                           value="{{client?.company}}">
+                                </div>
+                            </div>
+                            <div class="col-md-3 px-1">
+                                <div class="form-group">
+                                    <label>Nome persona chiave</label>
+                                    <input type="text" class="form-control" placeholder="Nome" value="{{client?.name}}">
+                                </div>
+                            </div>
+                            <div class="col-md-4 pl-1">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Email </label>
+                                    <input type="email" class="form-control" placeholder="Email"
+                                           value="{{client?.email}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    <label>Categoria</label>
+                                    <select class="selectpicker" [ngModelOptions]="{standalone: true}"
+                                            [ngModelOptions]="{standalone: true}" [(ngModel)]="categoryId" data-size="7"
+                                            data-style="btn btn-primary btn-round">
+                                        <option selected="selected">{{cateName}}</option>
+                                        <option [value]="category._id"
+                                                *ngFor="let category of categories">  {{category.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label>Stato Sede</label>
+                                    <select class="selectpicker" [ngModelOptions]="{standalone: true}"
+                                            [ngModelOptions]="{standalone: true}" [(ngModel)]="stateId" data-size="7"
+                                            data-style="btn btn-primary btn-round">
+                                        <option selected="selected">{{stateName}}</option>
+                                        <option [value]="state._id"
+                                                *ngFor="let state of states">  {{state.name}}</option>
+                                    </select></div>
+                            </div>
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label>Relazione</label>
+                                    <select class="selectpicker" [ngModelOptions]="{standalone: true}"
+                                            [ngModelOptions]="{standalone: true}" [(ngModel)]="relationId" data-size="7"
+                                            data-style="btn btn-primary btn-round">
+                                        <option selected="selected">{{stateName}}</option>
+                                        <option [value]="relation._id"
+                                                *ngFor="let relation of relations">  {{relation.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pr-1">
+                                <div class="form-group">
+                                    <label>Mercato</label>
+                                    <select class="selectpicker" [ngModelOptions]="{standalone: true}"
+                                            [ngModelOptions]="{standalone: true}" [(ngModel)]="exchangeId" data-size="7"
+                                            data-style="btn btn-primary btn-round">
+                                        <option selected="selected">{{exchangeName}}</option>
+                                        <option [value]="exchange._id"
+                                                *ngFor="let exchange of exchanges">  {{exchange.name}}</option>
+                                    </select></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 pr-1">
+                                <div class="form-group">
+                                    <label>Tipo Attività</label>
+                                    <input type="text" class="form-control" placeholder="City" value="{{client?.typoAct}}">
+                                </div>
+                            </div>
+                            <div class="col-md-4 px-1">
+                                <div class="form-group">
+                                    <label>Tipo Opportunità</label>
+                                    <input type="text" class="form-control" placeholder="Country" value="{{client?.typoOpp}}">
+                                </div>
+                            </div>
+                            <div class="col-md-4 pl-1">
+                                <div class="form-group">
+                                    <label>Sito Web</label>
+                                    <input type="number" class="form-control" placeholder="{{client?.url}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Note</label>
+                                    <textarea rows="4" cols="80"
+                                              class="form-control textarea">{{client?.note}}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                      <!--<div class="col-md-6">
+                        <h4 class="card-title">Tags</h4>
+                        <tag-input [(ngModel)]='tagItems' theme='regular-theme'></tag-input>
+                      </div>
+                      <tag-input [(ngModel)]='items'></tag-input>-->
+
+
+                      <div class="row">
+                        <label class="col-md-6 col-form-label">Tag
+                          <select  class="selectpicker" [ngModelOptions]="{standalone: true}" multiple [(ngModel)]="tagSId" data-size="7" data-style="btn btn-info btn-round" title="Tag">
+                            <option disabled selected>Tag</option>
+                            <option  [value]="tag._id" *ngFor="let tag of tags">  {{tag.name}}</option>
+                          </select>
+                        </label>
+                        <label class="col-md-3 col-form-label">Aggiungi Tag</label>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <input type="text"   name="tagName"   [ngModelOptions]="{standalone: true}"  [(ngModel)]="tagName" class="form-control" placeholder="Tag">
+                            <button> <i (click)="add('tag')"class="nc-icon nc-simple-add">Aggiungi</i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

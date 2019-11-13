@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatTableFilterModule } from 'mat-table-filter';
 
 import { TablesRoutes } from './viewer.routing';
@@ -18,6 +18,10 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import {ClientComponent} from "./clientpage/client.component";
+import { TagInputModule } from 'ngx-chips';
+import {JwBootstrapSwitchNg2Module} from "jw-bootstrap-switch-ng2";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
     imports: [
@@ -28,7 +32,13 @@ import {ClientComponent} from "./clientpage/client.component";
         FormsModule,
         MatTableModule,
         MatPaginatorModule,
-        MatTableFilterModule
+        MatTableFilterModule,
+        TagInputModule,
+        JwBootstrapSwitchNg2Module,
+        NgbModule,
+        TagInputModule,
+        FormsModule,
+        ReactiveFormsModule
     ],
     declarations: [
         MatTableComponent,

@@ -444,7 +444,7 @@ router.post('/client', upload.fields([{
 
     fs.readdir(testFolder, (err, files) => {
         if (err) {
-            var files = ["",""];
+            var files = ["", ""];
 
             console.log("Error getting directory information.")
             var newClient = Client({
@@ -525,9 +525,15 @@ router.post('/client', upload.fields([{
             });
         }
 
-         newClient.save(function (err) {
-        res.status(201).json(newClient + err);
-            })
+        newClient.save(function (err) {
+                if (err) {
+                    res.status(400).json("Errore :" + err)
+                } else {
+                    res.status(201).json(newClient + err);
+
+                }
+            }
+        )
     });
 
 

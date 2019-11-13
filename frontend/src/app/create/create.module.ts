@@ -17,6 +17,9 @@ import {MatButtonModule} from '@angular/material/button';
 
 import {ClientcreateComponent} from './client/clientcreate.component';
 import {OptionsComponent} from './options/options.component';
+import {TagInputModule} from "ngx-chips";
+import {JwBootstrapSwitchNg2Module} from "jw-bootstrap-switch-ng2";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
     imports: [
@@ -27,7 +30,12 @@ import {OptionsComponent} from './options/options.component';
         FormsModule,
         MatTableModule,
         MatPaginatorModule,
-        MatTableFilterModule
+        MatTableFilterModule,
+        FormsModule,
+        TagInputModule,
+        JwBootstrapSwitchNg2Module,
+        NgbModule,
+        FormsModule
     ],
     declarations: [
         ClientcreateComponent,
